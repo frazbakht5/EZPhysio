@@ -1,4 +1,30 @@
 const lambdas = {
+  serverHealth: {
+    handler: 'src/handlers/ServerHealth/serverHealthHandler.test',
+    events: [
+      {
+        http: {
+          method: 'GET',
+          path: '/serverHealth',
+          cors: {
+            allowCredentials: true,
+            headers: [
+              'accesstoken',
+              'accessToken',
+              'Origin',
+              'X-Requested-With',
+              'Content-Type',
+              'Accept',
+              'x-accesstoken',
+              'x-access-token',
+            ],
+            origin: '*',
+          },
+        },
+      },
+    ],
+    timeout: 30,
+  },
   login: {
     handler: 'src/handlers/Authentication/userHandler.login',
     events: [
