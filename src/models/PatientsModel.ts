@@ -1,28 +1,27 @@
 import { Schema, model } from 'mongoose';
 import * as uuid from 'node-uuid';
-export interface IUsers {
+export interface IPatients {
   _id: string;
   full_name: string;
   email: string;
   phone_number: string;
-  phone: string;
   age: number;
   occupation: string;
   location: string;
   password: string;
   // yahan se neechay metadata hai
   token: string;
-  is_active: boolean;
   imageUrl: string;
   auth_code?: string;
   plan_purchasing_date?: Date;
   plan_expiry_date?: Date;
+  is_active: boolean;
   createdAt?: Date;
   updateAt?: Date;
 }
 
 // 2. Create a Schema corresponding to the document interface.
-const schema = new Schema<IUsers>({
+const schema = new Schema<IPatients>({
   _id: {
     type: String,
     required: true,
@@ -30,15 +29,30 @@ const schema = new Schema<IUsers>({
   },
   full_name: {
     type: String,
-    required: [true, 'Please Provide your email'],
-    unique: true,
-    lowercase: true,
+    required: [true, 'Please Provide your full name'],
   },
   email: {
     type: String,
     required: [true, 'Please Provide your email'],
     unique: true,
     lowercase: true,
+  },
+  phone_number: {
+    type: String,
+    required: [true, 'Please Provide your phone number'],
+    unique: true,
+    lowercase: true,
+  },
+  age: {
+    type: Number,
+    required: [true, 'Please Provide your age'],
+  },
+  occupation: {
+    type: String,
+    lowercase: true,
+  },
+  location: {
+    type: String,
   },
   password: {
     type: String,
@@ -47,27 +61,11 @@ const schema = new Schema<IUsers>({
   token: {
     type: String,
   },
-  full_name: {
-    type: String,
-  },
-  phone: {
-    type: String,
-  },
   imageUrl: {
     type: String,
   },
   auth_code: {
     type: String,
-  },
-  role: {
-    type: String,
-  },
-  stripe_account_id: {
-    type: String,
-  },
-  is_stripe_attached: {
-    type: Boolean,
-    default: false,
   },
   plan_purchasing_date: {
     type: Date,
@@ -90,5 +88,5 @@ const schema = new Schema<IUsers>({
 });
 
 // 3. Create a Model.
-const Users = model<IUsers>('Users', schema);
-export default Users;
+const Patients = model<IPatients>('Patients', schema);
+export default Patients;

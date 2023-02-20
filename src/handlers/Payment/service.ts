@@ -1,5 +1,5 @@
 import { ICheckout } from 'src/interfaces/interfaces';
-import { IUsers } from 'src/models/UsersModel';
+import { IUsers } from 'src/models/PatientsModel';
 import Stripe from 'stripe';
 import { v4 as uuidv4 } from 'uuid';
 const STRIPE_SECERET_KEY =

@@ -1,5 +1,5 @@
 import { hash } from 'bcryptjs';
-import Users, { IUsers } from 'src/models/UsersModel';
+import Users, { IUsers } from 'src/models/PatientsModel';
 import ForgetPassword from 'src/models/ForgetPassword';
 import { IForgetPassword } from '../../interfaces/interfaces';
 
