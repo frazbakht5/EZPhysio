@@ -4,15 +4,17 @@ export interface IUsers {
   _id: string;
   full_name: string;
   email: string;
-  password: string;
+  phone_number: string;
   phone: string;
+  age: number;
+  occupation: string;
+  location: string;
+  password: string;
+  // yahan se neechay metadata hai
   token: string;
   is_active: boolean;
   imageUrl: string;
-  role?: string;
   auth_code?: string;
-  is_stripe_attached?: boolean;
-  stripe_account_id?: string;
   plan_purchasing_date?: Date;
   plan_expiry_date?: Date;
   createdAt?: Date;
@@ -25,6 +27,12 @@ const schema = new Schema<IUsers>({
     type: String,
     required: true,
     default: uuid.v1,
+  },
+  full_name: {
+    type: String,
+    required: [true, 'Please Provide your email'],
+    unique: true,
+    lowercase: true,
   },
   email: {
     type: String,

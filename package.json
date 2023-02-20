@@ -1,7 +1,7 @@
 {
-  "name": "serverlessy",
+  "name": "EZPhysio",
   "version": "1.0.0",
-  "description": "Serverless aws-nodejs-typescript template",
+  "description": "THis is backend serverless code for EZPysio app",
   "main": "serverless.ts",
   "scripts": {
     "start": "serverless offline start",

@@ -1,6 +1,6 @@
 1) Where is env?
 
-2) How to dun locally?
+2) How to run locally?
 
 3) Where to add layer functions like utilities etc?
 
