@@ -1,27 +1,27 @@
 import { hash } from 'bcryptjs';
-import Users, { IUsers } from 'src/models/UsersModel';
+import Patients, { IPatients } from 'src/models/PatientsModel';
 import ForgetPassword from 'src/models/ForgetPassword';
 import { IForgetPassword } from '../../interfaces/interfaces';
 
 export default class UserService {
   /**
-   * Create a Users
+   * Create a Patients
    * @param {Object} UsersBody
-   * @returns {Promise<Users>}
+   * @returns {Promise<Patients>}
    */
-  static createUsers = async (UsersBody: IUsers): Promise<IUsers | null> => {
-    return await Users.create(UsersBody).catch((error: any) => {
+  static createUsers = async (UsersBody: IPatients): Promise<IPatients | null> => {
+    return await Patients.create(UsersBody).catch((error: any) => {
       console.log(error);
       return null;
     });
   };
 
   /**
-   * Get all Users
-   * @returns {Promise<Users>}
+   * Get all Patients
+   * @returns {Promise<Patients>}
    */
-  static getUsers = async (_id: string): Promise<IUsers[] | null> => {
-    const Userss = await Users.find({ _id }).catch((error: any) => {
+  static getUsers = async (_id: string): Promise<IPatients[] | null> => {
+    const Userss = await Patients.find({ _id }).catch((error: any) => {
       console.log(error);
       return null;
     });
@@ -29,59 +29,59 @@ export default class UserService {
   };
 
   /**
-   * Get Users by id
+   * Get Patients by id
    * @param {ObjectId} id
-   * @returns {Promise<Users>}
+   * @returns {Promise<Patients>}
    */
-  static getUsersById = async (_id: string): Promise<IUsers | null> => {
-    return await Users.findById({ _id }).catch((error: any) => {
+  static getUsersById = async (_id: string): Promise<IPatients | null> => {
+    return await Patients.findById({ _id }).catch((error: any) => {
       console.log(error);
       return null;
     });
   };
 
   /**
-   * Get Users by email
+   * Get Patients by email
    * @param {string} email
-   * @returns {Promise<Users>}
+   * @returns {Promise<Patients>}
    */
-  static getUsersByEmail = async (email: string): Promise<IUsers | null> => {
-    return await Users.findOne({ email, is_active: true }).catch((error: any) => {
+  static getUsersByEmail = async (email: string): Promise<IPatients | null> => {
+    return await Patients.findOne({ email, is_active: true }).catch((error: any) => {
       console.log(error);
       return null;
     });
   };
   /**
-   * Get Users by email
+   * Get Patients by email
    * @param {string} email
-   * @returns {Promise<Users>}
+   * @returns {Promise<Patients>}
    */
-  static getAnyUsersByEmail = async (email: string): Promise<IUsers | null> => {
-    return await Users.findOne({ email }).catch((error: any) => {
+  static getAnyUsersByEmail = async (email: string): Promise<IPatients | null> => {
+    return await Patients.findOne({ email }).catch((error: any) => {
       console.log(error);
       return null;
     });
   };
   /**
-   * Get Users by email
+   * Get Patients by email
    * @param {string} email
-   * @returns {Promise<Users>}
+   * @returns {Promise<Patients>}
    */
-  static getUsersByEmailAuthCode = async (email: string, auth_code: string): Promise<IUsers | null> => {
-    return await Users.findOne({ email, auth_code, is_active: true }).catch((error: any) => {
+  static getUsersByEmailAuthCode = async (email: string, auth_code: string): Promise<IPatients | null> => {
+    return await Patients.findOne({ email, auth_code, is_active: true }).catch((error: any) => {
       console.log(error);
       return null;
     });
   };
 
   /**
-   * Update Users by id
+   * Update Patients by id
    * @param {ObjectId} id
    * @param {Object} updateBody
-   * @returns {Promise<Users>}
+   * @returns {Promise<Patients>}
    */
-  static updateUsersById = async (_id: string, updateBody: any): Promise<IUsers | null> => {
-    return await Users.findByIdAndUpdate(
+  static updateUsersById = async (_id: string, updateBody: any): Promise<IPatients | null> => {
+    return await Patients.findByIdAndUpdate(
       { _id },
       { $set: updateBody },
       {
@@ -94,20 +94,20 @@ export default class UserService {
   };
 
   /**
-   * Delete Users by id
+   * Delete Patients by id
    * @param {ObjectId} UsersId
-   * @returns {Promise<Users>}
+   * @returns {Promise<Patients>}
    */
   static deleteUsersById = async (id: string) => {
-    const Users = await this.getUsersById(id).catch((error: any) => {
+    const Patients = await this.getUsersById(id).catch((error: any) => {
       console.log(error);
       return null;
     });
-    if (!Users) {
-      return { message: 'Users not found', success: false };
+    if (!Patients) {
+      return { message: 'Patients not found', success: false };
     }
-    // await Users.remove();
-    return Users;
+    // await Patients.remove();
+    return Patients;
   };
 
   /**
@@ -124,11 +124,11 @@ export default class UserService {
 
   /**
    * Mapped signup data to Object
-   * @param Users Users
+   * @param Patients Patients
    * @returns mapped object typeof ISignup
    */
   static getMappedForgetPassword = async (
-    user: IUsers,
+    user: IPatients,
     verificationCode: string,
   ): Promise<{ email: string; code: string }> => {
     return {

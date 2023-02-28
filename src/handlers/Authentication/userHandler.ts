@@ -167,12 +167,18 @@ export const login = async (event: APIGatewayProxyEvent): Promise<APIGatewayProx
 };
 
 export const register = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
+  console.log('In here');
+
   try {
     const bodyParams = JSON.parse(event.body);
+
+    /*
     const validate = Validator(bodyParams, registerSchema);
     if (!validate.validate) {
       return formatJSONResponse(new Forbidden(validate.message).getResponse());
     }
+    */
+
     if (await connectToDatabase()) {
       console.log(bodyParams);
       const userInfo = await UsersService.getAnyUsersByEmail(bodyParams.email);
@@ -204,11 +210,11 @@ export const register = async (event: APIGatewayProxyEvent): Promise<APIGatewayP
             const code = await getSixDigitCode();
             if (code) {
               await UsersService.updateUsersById(insertResult._id, { auth_code: code });
-              await sendEmail(
+             /*  await sendEmail(
                 bodyParams.email,
                 'Verification Code',
                 '<b>Enter this code to Here</b> <br /> <b>' + code + '</b>',
-              );
+              ); */
               return formatJSONResponse(HttpResponse.created({ message: 'please verify your email' }));
             } else {
               // if not match

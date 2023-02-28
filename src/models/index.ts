@@ -1,12 +1,14 @@
 import * as mongoose from 'mongoose';
 
 async function connectToDatabase(): Promise<boolean> {
+  console.log('Connecting to db...');
+
   mongoose.set('strictQuery', true);
   return await mongoose
-    .connect('mongodb+srv://umar:GUjiNK4HFCLOg4BX@cluster0.gtovb.mongodb.net/olltv?retryWrites=true&w=majority')
+    .connect('mongodb://127.0.0.1:27017/EZPhysio')
     .then(() => {
-      const msgType = `Mangoose`;
-      const message = `Connection Mangoode:  has been established successfully.`;
+      const msgType = `Mongoose`;
+      const message = `Mongoose connection has been established successfully.`;
       console.log(msgType, message);
       return true;
     })
